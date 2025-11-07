@@ -10,9 +10,9 @@ if(isset($txtConteudo["cId"])){
     $cost_cents  = $txtConteudo["cCost_cents"];
     $price_cents = $txtConteudo["cPrice_cents"];
     $price_on_time_cents = $txtConteudo["cPrice_on_time_cents"];
-    $created_at = $txtConteudo["cCreated_at"];
-    $updated_at_at = $txtConteudo["cUpdated_at"];
-    $imagem = $_FILES['cImagem'] ?? null;
+    date_default_timezone_set('America/Sao_Paulo');
+    $updated_at = date('Y-m-d H:i:s');
+
 }else{
 
     echo 'Não foi alterado';
@@ -28,9 +28,7 @@ $sql = $sql." name = '$name',";
 $sql = $sql." cost_cents = '$cost_cents',";
 $sql = $sql." price_cents = '$price_cents',";
 $sql = $sql." price_on_time_cents = '$price_on_time_cents',";
-$sql = $sql." created_at = '$created_at',";
-$sql = $sql." updated_at = '$updated_at',";
-$sql = $sql." updated_at = '$imagem'";
+$sql = $sql." updated_at = '$updated_at'";
 
 
 $sql = $sql." WHERE ID = '".$id."'";

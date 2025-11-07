@@ -29,7 +29,7 @@ if (isset($txtConteudo["id"])){
 
 <html>
 <head>
-    <title> Alterar dados da pessoa </title>
+    <title> Alterar dados do produto </title>
 <style>
     #drop-area {
     width: 300px;
@@ -142,7 +142,7 @@ input:focus {
 <form action="gravaAlteracao.php" method="post"> 
 <input type="hidden" name="cId" value="<?php print $id;?>"/>
 <label> Ncm: </label><br>
-<input type="text" name="cNcm" value="<?php print $ncm;?>" required><br>
+<input type="text" name="cNcm" value="<?php print $ncm;?>"><br>
 <br>
 <label> Ecoflow_sku: </label><br>
 <input type="text" name="cEcoflow_sku" value="<?php print $ecoflow_sku;?>" required><br>
@@ -159,14 +159,8 @@ input:focus {
 <label> Price_on_time_cents: </label><br>
 <input type="text" name="cPrice_on_time_cents" value="<?php print $price_on_time_cents;?>" required><br>
 <br>
-<label> Created_at: </label><br>
-<input type="text" name="cCreated_at" value="<?php print $created_at;?>" required><br>
 <br>
-<label> Updated_at: </label><br>
-<input type="text" name="cUpdated_at" value="<?php print $updated_at;?>" required><br>
-<br>
-<br>
-<input type="submit" value="Enviar" name="b1"><br>
+<input type="submit" value="Enviar" name="b1" class="btn"><br>
 </form>
 </div>
 </body>

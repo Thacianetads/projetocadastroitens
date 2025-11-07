@@ -19,7 +19,7 @@ if (isset($txtConteudo["id"])) {
 
 <html>
 <head>
-<title> Alterar dados da pessoa </title>
+<title> Alterar dados do produto </title>
 <head>
 <body>
 <meta charset="UTF-8">

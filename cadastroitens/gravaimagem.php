@@ -1,6 +1,8 @@
 <?php
 $txtConteudo = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 $id = $txtConteudo["cId"] ?? null;
+date_default_timezone_set('America/Sao_Paulo');
+$updated_at = date('Y-m-d H:i:s');
 $imagem = $_FILES["cImagem"] ?? null;
 
 if (!$id) die("❌ ID do produto não informado.");
@@ -54,8 +56,8 @@ $imagem_url = "$supabase_url/storage/v1/object/public/$bucket/$nome_arquivo";
 echo "✅ Imagem substituída com sucesso! <br>";
 echo "URL pública: <a href='$imagem_url' target='_blank'>$imagem_url</a>";
 
-$stmt = $conexao->prepare("UPDATE TBPRODUTO SET imagem = ? WHERE ID = ?");
-$stmt->bind_param("si", $imagem_url, $id);
+$stmt = $conexao->prepare("UPDATE TBPRODUTO SET imagem = ?, updated_at = ? WHERE ID = ?");
+$stmt->bind_param("ssi", $imagem_url, $updated_at, $id);
 if ($stmt->execute()) {
     echo "<br>GRAVAÇÃO EXECUTADA COM SUCESSO!";
     echo '<meta http-equiv="refresh" content="0;URL=consultaProduto.php">';

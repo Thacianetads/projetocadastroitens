@@ -3,24 +3,6 @@
     <meta charset="UTF-8">
     <title> FORMULÁRIO PRODUTO </title>
     <style>
-  #drop-area {
-    width: 300px;
-    height: 200px;
-    border: 2px dashed #ccc;
-    border-radius: 10px;
-    text-align: center;
-    line-height: 200px;
-    font-family: Arial, sans-serif;
-    color: #aaa;
-    margin: 50px auto;
-    cursor: pointer;
-  }
-  #drop-area img {
-    max-width: 100%;
-    max-height: 100%;
-    display: block;
-    margin: 0 auto;
-  }
 
   /* Fundo geral e estilo base */
 body {
@@ -130,15 +112,6 @@ input:focus {
 <label> Price_on_time_cents: </label><br>
 <input type="text" name="cPrice_on_time_cents"><br>
 <br>
-<label> Created_at: </label><br>
-<input type="text" name="cCreated_at"><br>
-<br>
-<label> Updated_at: </label><br>
-<input type="text" name="cUpdated_at"><br>
-
-
-<label> Imagem: </label><br>
-<input type="file" name="cImagem" accept="image/*"><br>
 
 <input type="submit" value="Inserir" name="b1" class="btn"><br>
 </form>

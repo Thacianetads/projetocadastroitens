@@ -185,7 +185,7 @@ $total_registros = mysqli_num_rows($rs);
     </script>
 </head>
 <body>
-<h1> Relação de Produto </h1>
+<h1> Lista de produtos </h1>
 <hr>
 <br>
 <table cellspacing = "0" border = "1">
@@ -200,8 +200,8 @@ $total_registros = mysqli_num_rows($rs);
         <th>created_at</th>
         <th>updated_at</th>
         <th>imagem</th>
-        <th>Atualizar imagem</th>
-        <th>Atualizar produto</th>
+        <th>Anexar imagem</th>
+        <th>Atualizar item</th>
         <th>Excluir imagem</th>
     </tr>
 </thead>
@@ -241,10 +241,10 @@ $total_registros = mysqli_num_rows($rs);
 <?php } ?>
         </td>
         <td>
-            <button><a href="alteraimagem.php?id=<?php print $id;?>">Atualizar a imagem</a></button>
+            <button><a href="alteraimagem.php?id=<?php print $id;?>">Anexar imagem</a></button>
         </td>
          <td>
-            <button><a href="alteraProduto.php?id=<?php print $id;?>">Atualizar os dados</a></button><br>
+            <button><a href="alteraProduto.php?id=<?php print $id;?>">Atualizar item</a></button><br>
         </td>
         <td>
             <a href="javascript:func()" onclick="confirmacao('<?php print $id; ?>','<?php print $imagem;?>')"><img src="excluir.png" alt="Exclui Pessoa" border ="0" widht="20px" height="20px"></a>
