@@ -139,29 +139,56 @@ input:focus {
 <body>
 <div class="container"> 
 <h1>TELA PARA ALTERAR DADOS DO PRODUTO </H1> <HR><BR>
-<form action="gravaAlteracao.php" method="post"> 
-<input type="hidden" name="cId" value="<?php print $id;?>"/>
+<form action="gravaAlteracao.php" id="produtoForm" method="post"> 
+<input type="hidden" id="id" name="cId" value="<?php print $id;?>"/>
 <label> Ncm: </label><br>
-<input type="text" name="cNcm" value="<?php print $ncm;?>"><br>
+<input type="text" id="ncm" name="cNcm" value="<?php print $ncm;?>"><br>
 <br>
 <label> Ecoflow_sku: </label><br>
-<input type="text" name="cEcoflow_sku" value="<?php print $ecoflow_sku;?>" required><br>
+<input type="text" id="ecoflow_sku" name="cEcoflow_sku" value="<?php print $ecoflow_sku;?>" required><br>
 <br>
 <label> Name: </label><br>
-<input type="text" name="cName" value="<?php print $name;?>" required><br>
+<input type="text" id="name" name="cName" value="<?php print $name;?>" required><br>
 <br>
 <label> Cost_cents: </label><br>
-<input type="text" name="cCost_cents" value="<?php print $cost_cents;?>" required><br>
+<input type="text" id="cost_cents" name="cCost_cents" value="<?php print $cost_cents;?>" required><br>
 <br>
 <label> Price_cents: </label><br>
-<input type="text" name="cPrice_cents" value="<?php print $price_cents;?>" required><br>
+<input type="text" id="price_cents" name="cPrice_cents" value="<?php print $price_cents;?>" required><br>
 <br>
 <label> Price_on_time_cents: </label><br>
-<input type="text" name="cPrice_on_time_cents" value="<?php print $price_on_time_cents;?>" required><br>
+<input type="text" id="price_on_time_cents" name="cPrice_on_time_cents" value="<?php print $price_on_time_cents;?>" required><br>
 <br>
 <br>
 <input type="submit" value="Enviar" name="b1" class="btn"><br>
 </form>
+<script>
+document.getElementById('produtoForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const data = {
+    id: document.getElementById('id').value,
+    ncm: document.getElementById('ncm').value,
+    ecoflow_sku: document.getElementById('ecoflow_sku').value,
+    name: document.getElementById('name').value,
+    cost_cents: document.getElementById('cost_cents').value,
+    price_cents: document.getElementById('price_cents').value,
+    price_on_time_cents: document.getElementById('price_on_time_cents').value
+  };
+
+  const response = await fetch('https://n8n-cwb-main-webhook-test.nwdrones.com.br/webhook/8d52a45b-7e38-4a90-888b-3a89b5c682bf', {
+    method: 'PUT', 
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  });
+
+  if (response.ok) {
+    alert('Produto atualizado com sucesso!');
+  } else {
+    alert('Erro ao atualizar: ' + response.statusText);
+  }
+});
+</script>
 </div>
 </body>
 </html>

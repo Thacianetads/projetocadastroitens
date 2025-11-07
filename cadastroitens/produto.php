@@ -93,28 +93,64 @@ input:focus {
 <body>
 <div class="container">    
 <h1 class="w3-center">FORMULÁRIO PRODUTO</h1><hr><br>
-<form action="gravaProduto.php" method="post" enctype="multipart/form-data"> 
+<form action="gravaProduto.php" id="produtoForm" method="post" enctype="multipart/form-data"> 
 <label> Ncm: </label><br>
-<input type="text" name="cNcm"><br>
+<input type="text" id="ncm" name="cNcm" required><br>
 <br>
 <label> Ecoflow_sku: </label><br>
-<input type="text" name="cEcoflow_sku"><br>
+<input type="text" id="ecoflow_sku" name="cEcoflow_sku" required><br>
 <br>
 <label> Name: </label><br>
-<input type="text" name="cName"><br>
+<input type="text" id="name" name="cName" required><br>
 <br>
 <label> Cost_cents: </label><br>
-<input type="text" name="cCost_cents"><br>
+<input type="text" id="cost_cents" name="cCost_cents" required><br>
 <br>
 <label> Price_cents: </label><br>
-<input type="text" name="cPrice_cents"><br>
+<input type="text" id="price_cents" name="cPrice_cents" required><br>
 <br>
 <label> Price_on_time_cents: </label><br>
-<input type="text" name="cPrice_on_time_cents"><br>
+<input type="text" id="price_on_time_cents" name="cPrice_on_time_cents" required><br>
 <br>
 
 <input type="submit" value="Inserir" name="b1" class="btn"><br>
 </form>
 </div>
+<script>
+  document.getElementById('produtoForm').addEventListener('submit', async function(e) {
+    e.preventDefault(); // previne o envio tradicional do formulário
+
+    // coleta os dados do formulário
+    const data = {
+      ncm: document.getElementById('ncm').value,
+      ecoflow_sku: document.getElementById('ecoflow_sku').value,
+      name: document.getElementById('name').value,
+      cost_cents: document.getElementById('cost_cents').value,
+      price_cents: document.getElementById('price_cents').value,
+      price_on_time_cents: document.getElementById('price_on_time_cents').value
+    };
+
+    try {
+      // envia os dados para o webhook usando POST
+      const response = await fetch('https://n8n-cwb-main-webhook-test.nwdrones.com.br/webhook/8d52a45b-7e38-4a90-888b-3a89b5c682bf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+      });
+
+      if(response.ok) {
+        alert('Dados enviados com sucesso!');
+        echo '<meta http-equiv="refresh" content="0;URL=consultaProduto.php">';
+      } else {
+        alert('Erro ao enviar os dados: ' + response.statusText);
+      }
+    } catch (error) {
+      alert('Erro na requisição: ' + error.message);
+    }
+  });
+</script>
+
 </body>
 </html>
