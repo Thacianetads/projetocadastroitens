@@ -16,7 +16,7 @@ if(isset($txtConteudo["cId"])){
 }else{
 
     echo 'Não foi alterado';
-    echo '<meta http-equiv="refresh" content="2;URL=alteraPessoa.php" />';
+    echo '<meta http-equiv="refresh" content="2;URL=alteraProduto.php" />';
 }
 include "conecta.php";
 
@@ -47,6 +47,4 @@ echo'<meta http-equiv="refresh"
         content="0;URL=consultaProduto.php">';
 ?>
     
-?>
-
 

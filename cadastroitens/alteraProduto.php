@@ -142,7 +142,7 @@ input:focus {
 <form action="gravaAlteracao.php" id="produtoForm" method="post"> 
 <input type="hidden" id="id" name="cId" value="<?php print $id;?>"/>
 <label> Ncm: </label><br>
-<input type="text" id="ncm" name="cNcm" value="<?php print $ncm;?>"><br>
+<input type="text" id="ncm" name="cNcm" value="<?php print $ncm;?>" required><br>
 <br>
 <label> Ecoflow_sku: </label><br>
 <input type="text" id="ecoflow_sku" name="cEcoflow_sku" value="<?php print $ecoflow_sku;?>" required><br>

@@ -191,6 +191,7 @@ $total_registros = mysqli_num_rows($rs);
 <table cellspacing = "0" border = "1">
 <thead>
     <tr>
+        <th>id:</th>
         <th>ncm</th>
         <th>ecoflow_sku</th>
         <th>name</th>
@@ -220,6 +221,7 @@ $total_registros = mysqli_num_rows($rs);
 
 ?>
     <tr>
+        <td><?php print $id; ?></td>
         <td><?php print $ncm; ?></td>
         <td><?php print $ecoflow_sku; ?></td>
         <td><?php print $name; ?></td>

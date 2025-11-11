@@ -23,7 +23,7 @@ if (!in_array($extensao, $extensoes_permitidas)) die("❌ Extensão de arquivo n
 if ($imagem['size'] > 2 * 1024 * 1024) die("❌ Arquivo muito grande (máx 2MB).");
 
 // Nome do arquivo (mesmo nome para substituir)
-$nome_arquivo = "produto_" . $id . "." . $extensao;
+$nome_arquivo = "produto_" . uniqid() . "." . $extensao;
 
 // Envia para Supabase usando cURL
 if (!function_exists('curl_init')) die("❌ cURL não habilitado.");
@@ -56,14 +56,44 @@ $imagem_url = "$supabase_url/storage/v1/object/public/$bucket/$nome_arquivo";
 echo "✅ Imagem substituída com sucesso! <br>";
 echo "URL pública: <a href='$imagem_url' target='_blank'>$imagem_url</a>";
 
+$webhook_url = "https://n8n-cwb-main-webhook-test.nwdrones.com.br/webhook/cadastroproduto";
+
+$curl_webhook = curl_init();
+curl_setopt_array($curl_webhook, [
+    CURLOPT_URL => $webhook_url,
+    CURLOPT_RETURNTRANSFER => true,
+    CURLOPT_POST => true,
+    CURLOPT_POSTFIELDS => json_encode([
+        'id_produto' => $id,
+        'imagem_url' => $imagem_url
+    ]),
+    CURLOPT_HTTPHEADER => [
+        "Content-Type: application/json"
+    ],
+]);
+
+$response_webhook = curl_exec($curl_webhook);
+$http_code_webhook = curl_getinfo($curl_webhook, CURLINFO_HTTP_CODE);
+$error_webhook = curl_error($curl_webhook);
+curl_close($curl_webhook);
+
+if ($http_code_webhook != 200 && $http_code_webhook != 201) {
+    echo "<br>⚠️ Erro ao enviar para o webhook (HTTP $http_code_webhook): $error_webhook <br>Resposta: $response_webhook";
+} else {
+    echo "<br>✅ URL da imagem enviada para o webhook com sucesso!";
+}
+
+// Atualiza URL da imagem no banco
 $stmt = $conexao->prepare("UPDATE TBPRODUTO SET imagem = ?, updated_at = ? WHERE ID = ?");
 $stmt->bind_param("ssi", $imagem_url, $updated_at, $id);
+
 if ($stmt->execute()) {
     echo "<br>GRAVAÇÃO EXECUTADA COM SUCESSO!";
     echo '<meta http-equiv="refresh" content="0;URL=consultaProduto.php">';
 } else {
-    echo "❌ Problemas na gravação: " . $stmt->error;
+    echo "<br>❌ Problemas na gravação: " . $stmt->error;
 }
+
 $stmt->close();
 mysqli_close($conexao);
 ?>
