@@ -3,16 +3,17 @@
 $ncm = $_POST['cNcm'];
 $ecoflow_sku = $_POST['cEcoflow_sku'];
 $name = $_POST['cName'];
-$cost_cents = $_POST['cCost_cents'];
-$price_cents = $_POST['cPrice_cents'];
-$price_on_time_cents = $_POST['cPrice_on_time_cents'];
+$preco = $_POST['cPreco'];
+$fabricante = $_POST['cFabricante'];
+$fornecedor = $_POST['cFornecedor'];
+$tags = $_POST['cTags'];
 date_default_timezone_set('America/Sao_Paulo');
 $created_at = date('Y-m-d H:i:s');
 $updated_at = date('Y-m-d H:i:s');
 $imagem = $_FILES["cImagem"] ?? null;
 
 
-if (!$name || !$price_cents) die("❌ Nome ou preço do produto não informado.");
+if (!$name || !$preco) die("❌ Nome ou preço do produto não informado.");
 
 $imagem_url = null;
 
@@ -63,17 +64,18 @@ include "conecta.php";
 
 // --- SALVA NO MYSQL ---
 $stmt = $conexao->prepare("INSERT INTO TBPRODUTO 
-    (ncm, ecoflow_sku, name, cost_cents, price_cents, price_on_time_cents, created_at, updated_at, imagem) 
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+    (ncm, ecoflow_sku, name, preco, fabricante, fornecedor, tags, created_at, updated_at, imagem) 
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
 $stmt->bind_param(
-    "sssiiisss",
+    "sssissssss",
     $ncm,
     $ecoflow_sku,
     $name,
-    $cost_cents,
-    $price_cents,
-    $price_on_time_cents,
+    $preco,
+    $fabricante,
+    $fornecedor,
+    $tags,
     $created_at,
     $updated_at,
     $imagem_url
@@ -87,7 +89,12 @@ if ($imagem_url) {
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST => true,
         CURLOPT_POSTFIELDS => json_encode([
-            'id' => $id,
+            'ncm' => $ncm,
+            'ecoflow_sku' => $ecoflow_sku,
+            'name' => $name,
+            'preco' => $preco,
+            'created_at' => $created_at,
+            'updated_at' => $updated_at,
             'imagem_url' => $imagem_url
         ]),
         CURLOPT_HTTPHEADER => ["Content-Type: application/json"],

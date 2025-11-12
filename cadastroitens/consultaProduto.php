@@ -191,17 +191,16 @@ $total_registros = mysqli_num_rows($rs);
 <table cellspacing = "0" border = "1">
 <thead>
     <tr>
-        <th>id:</th>
         <th>ncm</th>
-        <th>ecoflow_sku</th>
-        <th>name</th>
-        <th>cost_cents</th>
-        <th>price_cents</th>
-        <th>price_on_time_cents</th>
-        <th>created_at</th>
-        <th>updated_at</th>
+        <th>sku</th>
+        <th>nome do produto</th>
+        <th>preço</th>
+        <th>Fabricante</th>
+        <th>Fornecedor</th>
+        <th>Tags</th>
         <th>imagem</th>
-        <th>Anexar imagem</th>
+        <th>Cadastrar imagem</th>
+        <th>Atualizar imagem</th>
         <th>Atualizar item</th>
         <th>Excluir imagem</th>
     </tr>
@@ -212,24 +211,21 @@ $total_registros = mysqli_num_rows($rs);
         $ncm = $reg["ncm"];
         $ecoflow_sku = $reg["ecoflow_sku"];
         $name = $reg["name"];
-        $cost_cents = $reg["cost_cents"];
-        $price_cents = $reg["price_cents"];
-        $price_on_time_cents = $reg["price_on_time_cents"];
-        $created_at = $reg["created_at"];
-        $updated_at = $reg["updated_at"];
+        $preco = $reg["preco"];
+        $fabricante = $reg["fabricante"];
+        $fornecedor = $reg["fornecedor"];
+        $tags = $reg["tags"];
         $imagem = $reg["imagem"];
 
 ?>
     <tr>
-        <td><?php print $id; ?></td>
         <td><?php print $ncm; ?></td>
         <td><?php print $ecoflow_sku; ?></td>
         <td><?php print $name; ?></td>
-        <td><?php print $cost_cents; ?></td>
-        <td><?php print $price_cents; ?></td>
-        <td><?php print $price_on_time_cents; ?></td>
-        <td><?php print $created_at; ?></td>
-        <td><?php print $updated_at; ?></td>
+        <td><?php print $preco; ?></td>
+        <td><?php print $fabricante; ?></td>
+        <td><?php print $fornecedor; ?></td>
+        <td><?php print $tags; ?></td>
         <td>
         <?php if(!empty($imagem)){ ?>
         <a href="<?php echo htmlspecialchars(trim($imagem)); ?>" 
@@ -243,7 +239,10 @@ $total_registros = mysqli_num_rows($rs);
 <?php } ?>
         </td>
         <td>
-            <button><a href="alteraimagem.php?id=<?php print $id;?>">Anexar imagem</a></button>
+            <button><a href="cadastraimagem.php?id=<?php print $id;?>">Cadastrar imagem</a></button>
+        </td>
+        <td>
+            <button><a href="alteraimagem.php?id=<?php print $id;?>">Atualizar imagem</a></button>
         </td>
          <td>
             <button><a href="alteraProduto.php?id=<?php print $id;?>">Atualizar item</a></button><br>

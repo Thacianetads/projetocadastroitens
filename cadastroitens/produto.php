@@ -15,12 +15,13 @@ body {
     margin: 0;
 }
 
+
 .container {
     background-color: #fff;
     border-radius: 10px;
     box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     padding: 30px 40px;
-    width: 400px;
+    width: 350px;
 }
 
 label {
@@ -31,7 +32,17 @@ label {
 }
 
 input[type="text"] {
-    width: 100%;
+    width: 93%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 5px;
+    font-size: 14px;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input[type="file"] {
+    width: 93%;
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -62,34 +73,85 @@ input:focus {
 .btn:hover {
     background-color: #005fa3;
 }
+
+.styled-select {
+  appearance: none;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 40px 10px 15px; /* reduzido para caber o texto */
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  width: 100%; /* garante que ocupe toda a largura do container */
+  box-sizing: border-box; /* evita estouro do container */
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  transition: all 0.3s ease;
+}
+
+.styled-select:hover {
+  border-color: #888;
+}
+
+.styled-select:focus {
+  border-color: #0078ff;
+  box-shadow: 0 0 4px rgba(0, 120, 255, 0.4);
+  outline: none;
+}
 </style>
 </head>
 <body>
 
 <div class="container">
-    <h1>FORMULÁRIO PRODUTO</h1>
+    <h1>Cadastrar itens</h1>
     <hr>
     <form action="gravaProduto.php" id="produtoForm" enctype="multipart/form-data" method="post">
-        <label>Ncm:</label>
+        <label>NCM: </label>
         <input type="text" id="ncm" name="cNcm" required>
 
-        <label>Ecoflow_sku:</label>
+        <label>SKU: </label>
         <input type="text" id="ecoflow_sku" name="cEcoflow_sku" required>
 
-        <label>Name:</label>
+        <label>Nome do produto:</label>
         <input type="text" id="name" name="cName" required>
+        <br>
+        <label>Preço:</label>
+        <input type="text" id="preco" name="cPreco" required>
+        <br>
+        <label>Fabricante:</label>
+        <SELECT name = "cFabricante" id="fabricante" class="styled-select" required><br><br>
+        <OPTION SELECT VALUE ="Selecione a opção">Selecione a opção
+        <OPTION SELECT VALUE ="PGYTECH">PGYTECH
+        <OPTION SELECT VALUE ="DJI">DJI
+        <OPTION SELECT VALUE ="ECOFLOW">ECOFLOW
+        <OPTION SELECT VALUE ="AUTEL">AUTEL
+        <OPTION SELECT VALUE ="MICASENSE">MICASENSE
+        <OPTION SELECT VALUE ="SPACEX">SPACEX
+        </SELECT><br>
 
-        <label>Cost_cents:</label>
-        <input type="text" id="cost_cents" name="cCost_cents" required>
+        <label>Fornecedor:</label>
+        <SELECT name = "cFornecedor" id="fornecedor" class="styled-select" required><br><br>
+        <OPTION SELECT VALUE ="Selecione a opção">Selecione a opção
+        <OPTION SELECT VALUE ="MULTILASER">MULTILASER
+        <OPTION SELECT VALUE ="INTELBRAS">INTELBRAS
+        <OPTION SELECT VALUE ="TIMBER">TIMBER
+        <OPTION SELECT VALUE ="GOLDEN DISTRIBUIDORA LTDA">GOLDEN DISTRIBUIDORA LTDA
+        <OPTION SELECT VALUE ="GOHOBBYT FUTURE TECHNOLOGY LTDA">GOHOBBYT FUTURE TECHNOLOGY LTDA
+        </SELECT><br>
 
-        <label>Price_cents:</label>
-        <input type="text" id="price_cents" name="cPrice_cents" required>
-
-        <label>Price_on_time_cents:</label>
-        <input type="text" id="price_on_time_cents" name="cPrice_on_time_cents" required>
-        <label>Atualizar imagem:</label><br>
-        <input type="file" name="cImagem" accept="image/*"><br>  
+        <label>Tags:</label>
+        <SELECT name = "cTags" id="tags" class="styled-select" required><br><br>
+        <OPTION SELECT VALUE ="Selecione a opção">Selecione a opção
+        <OPTION SELECT VALUE ="Colombo">Colombo
+        <OPTION SELECT VALUE ="Curitiba">Curitiba
+        </SELECT><br>
+        
+        <label>Adicionar imagem:</label>
+        <input type="file" id="imagem" name="cImagem" accept="image/*"><br>  
         <input type="submit" value="Inserir" class="btn">
+    </form>
 </div>
 
 <script>
@@ -99,9 +161,10 @@ document.getElementById('produtoForm').addEventListener('submit', function() {
         ncm: document.getElementById('ncm').value,
         ecoflow_sku: document.getElementById('ecoflow_sku').value,
         name: document.getElementById('name').value,
-        cost_cents: document.getElementById('cost_cents').value,
-        price_cents: document.getElementById('price_cents').value,
-        price_on_time_cents: document.getElementById('price_on_time_cents').value
+        preco: document.getElementById('preco').value,
+        fabricante: document.getElementById('fabricante').value,
+        tags: document.getElementById('tags').value,
+        imagem: document.getElementById('imagem').value
     };
 
     fetch('https://n8n-cwb-main-webhook-test.nwdrones.com.br/webhook/cadastroproduto', {

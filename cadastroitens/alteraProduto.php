@@ -15,11 +15,12 @@ if (isset($txtConteudo["id"])){
     $ncm = $reg ["ncm"];
     $ecoflow_sku = $reg["ecoflow_sku"];
     $name = $reg["name"];
-    $cost_cents = $reg["cost_cents"];
-    $price_cents = $reg["price_cents"];
-    $price_on_time_cents = $reg["price_on_time_cents"];
+    $preco = $reg["preco"];
     $created_at = $reg["created_at"];
     $updated_at = $reg["updated_at"];
+    $fabricante = $reg['fabricante'];
+    $fornecedor = $reg['fornecedor'];
+    $tags = $reg['tags'];
     
 }else{
     echo "REGISTRO NÃO LOCALIZADO!";
@@ -65,10 +66,9 @@ body {
 .container {
     background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     padding: 30px 40px;
-    width: 400px;
-    animation: fadeIn 0.4s ease;
+    width: 350px;
 }
 
  .drop-area {
@@ -134,6 +134,31 @@ input:focus {
 .btn:hover {
     background-color: #005fa3;
 }
+
+.styled-select {
+  appearance: none;
+  background-color: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px 200px 10px 15px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  transition: all 0.3s ease;
+}
+
+.styled-select:hover {
+  border-color: #888;
+}
+
+.styled-select:focus {
+  border-color: #0078ff;
+  box-shadow: 0 0 4px rgba(0, 120, 255, 0.4);
+  outline: none;
+}
 </style>
 </head>
 <body>
@@ -141,53 +166,58 @@ input:focus {
 <h1>TELA PARA ALTERAR DADOS DO PRODUTO </H1> <HR><BR>
 <form action="gravaAlteracao.php" id="produtoForm" method="post"> 
 <input type="hidden" id="id" name="cId" value="<?php print $id;?>"/>
-<label> Ncm: </label><br>
+<label> NCM: </label>
 <input type="text" id="ncm" name="cNcm" value="<?php print $ncm;?>" required><br>
-<br>
-<label> Ecoflow_sku: </label><br>
+<label> SKU: </label>
 <input type="text" id="ecoflow_sku" name="cEcoflow_sku" value="<?php print $ecoflow_sku;?>" required><br>
-<br>
-<label> Name: </label><br>
+<label> Nome: </label>
 <input type="text" id="name" name="cName" value="<?php print $name;?>" required><br>
+<label> Preço: </label>
+<input type="text" id="preco" name="cPreco" value="<?php print $preco;?>" required><br>
+<label>Fabricante:</label>
+    <select name="cFabricante" id="fabricante" class="styled-select" required>
+    <option value="">Selecione a opção</option>
+    <option value="Colombo" <?php if ($fabricante == "Colombo") echo "selected"; ?>>Colombo</option>
+    <option value="Curitiba" <?php if ($fabricante == "Curitiba") echo "selected"; ?>>Curitiba</option>
+    </select>
+<label>Fornecedor:</label>
+        <select name="cFornecedor" id="fornecedor" class="styled-select" required>
+        <option value="">Selecione a opção</option>
+        <option value="Colombo" <?php if ($fornecedor == "Colombo") echo "selected"; ?>>Colombo</option>
+        <option value="Curitiba" <?php if ($fornecedor == "Curitiba") echo "selected"; ?>>Curitiba</option>
+        </select>
+<label>Tags:</label>
+        <select name="cTags" id="tags" class="styled-select" required>
+        <option value="">Selecione a opção</option>
+        <option value="Colombo" <?php if ($tags == "Colombo") echo "selected"; ?>>Colombo</option>
+        <option value="Curitiba" <?php if ($tags == "Curitiba") echo "selected"; ?>>Curitiba</option>
+        </select>
 <br>
-<label> Cost_cents: </label><br>
-<input type="text" id="cost_cents" name="cCost_cents" value="<?php print $cost_cents;?>" required><br>
-<br>
-<label> Price_cents: </label><br>
-<input type="text" id="price_cents" name="cPrice_cents" value="<?php print $price_cents;?>" required><br>
-<br>
-<label> Price_on_time_cents: </label><br>
-<input type="text" id="price_on_time_cents" name="cPrice_on_time_cents" value="<?php print $price_on_time_cents;?>" required><br>
-<br>
-<br>
+
+
 <input type="submit" value="Enviar" name="b1" class="btn"><br>
 </form>
 <script>
-document.getElementById('produtoForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-
+    document.getElementById('produtoForm').addEventListener('submit', async (e) => {
   const data = {
     id: document.getElementById('id').value,
     ncm: document.getElementById('ncm').value,
     ecoflow_sku: document.getElementById('ecoflow_sku').value,
     name: document.getElementById('name').value,
-    cost_cents: document.getElementById('cost_cents').value,
-    price_cents: document.getElementById('price_cents').value,
-    price_on_time_cents: document.getElementById('price_on_time_cents').value
+    preco: document.getElementById('preco').value,
+    fabricante: document.getElementById('fabricante').value,
+    fornecedor: document.getElementById('fornecedor').value,
+    tags: document.getElementById('tags').value
   };
 
-  const response = await fetch('https://n8n-cwb-main-webhook-test.nwdrones.com.br/webhook/8d52a45b-7e38-4a90-888b-3a89b5c682bf', {
-    method: 'PUT', 
+  fetch('https://n8n-cwb-main-webhook-test.nwdrones.com.br/webhook/8d52a45b-7e38-4a90-888b-3a89b5c682bf', {
+    method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data)
   });
-
-  if (response.ok) {
-    alert('Produto atualizado com sucesso!');
-  } else {
-    alert('Erro ao atualizar: ' + response.statusText);
-  }
+  // não usa preventDefault — o PHP ainda recebe o POST
 });
+
 </script>
 </div>
 </body>

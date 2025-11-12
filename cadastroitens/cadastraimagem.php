@@ -19,7 +19,7 @@ if (isset($txtConteudo["id"])) {
 
 <html>
 <head>
-<title> Alterar imagem </title>
+<title> Alterar dados do produto </title>
 <head>
 <body>
 <meta charset="UTF-8">
@@ -130,15 +130,13 @@ input:focus {
 }
 </style>
 <div class="container">
-<h1>ALTERAR IMAGEM </H1> <HR><BR>
-<input type="text" value="<?php print $imagem;?>"><br><br>
-<form action="gravaimagem.php" method="post" enctype="multipart/form-data"> 
+<h1>CADASTRAR IMAGEM </H1> <HR><BR>
+<form action="adicionaimagem.php" method="post" enctype="multipart/form-data"> 
 <input type="hidden" name="cId" value="<?php echo $id;?>"/>
 <div class="div1">
 <div class="div2">
 <br>
-<br>
-<label>Atualizar imagem:</label><br>
+<label>Cadastrar imagem:</label><br>
 <input type="file" name="cImagem" accept="image/*" enctype="multipart/form-data"><br>
 <input type="submit" value="Enviar" name="b1" class="btn"><br>
 </div>
