@@ -13,6 +13,7 @@ if(isset($txtConteudo["cId"])){
     $tags = $txtConteudo['cTags'];
     date_default_timezone_set('America/Sao_Paulo');
     $updated_at = date('Y-m-d H:i:s');
+    $imagem = $_FILES["cImagem"] ?? null;
 
 }else{
 

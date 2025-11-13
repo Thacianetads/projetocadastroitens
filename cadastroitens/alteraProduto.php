@@ -140,10 +140,12 @@ input:focus {
   background-color: #ffffff;
   border: 1px solid #ccc;
   border-radius: 8px;
-  padding: 10px 200px 10px 15px;
+  padding: 10px 40px 10px 15px; /* reduzido para caber o texto */
   font-size: 16px;
   color: #333;
   cursor: pointer;
+  width: 100%; /* garante que ocupe toda a largura do container */
+  box-sizing: border-box; /* evita estouro do container */
   background-image: url('data:image/svg+xml;utf8,<svg fill="%23333" height="20" viewBox="0 0 24 24" width="20" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/></svg>');
   background-repeat: no-repeat;
   background-position: right 10px center;
@@ -177,20 +179,40 @@ input:focus {
 <label>Fabricante:</label>
     <select name="cFabricante" id="fabricante" class="styled-select" required>
     <option value="">Selecione a opção</option>
-    <option value="Colombo" <?php if ($fabricante == "Colombo") echo "selected"; ?>>Colombo</option>
-    <option value="Curitiba" <?php if ($fabricante == "Curitiba") echo "selected"; ?>>Curitiba</option>
+    <option value="PGYTECH" <?php if ($fabricante == "PGYTECH") echo "selected"; ?>>PGYTECH</option>
+    <option value="DJI" <?php if ($fabricante == "DJI") echo "selected"; ?>>DJI</option>
+    <option value="ECOFLOW" <?php if ($fabricante == "ECOFLOW") echo "selected"; ?>>ECOFLOW</option>
+    <option value="AUTEL" <?php if ($fabricante == "AUTEL") echo "selected"; ?>>AUTEL</option>
+    <option value="MICASENSE" <?php if ($fabricante == "MICASENSE") echo "selected"; ?>>MICASENSE</option>
+    <option value="SPACEX" <?php if ($fabricante == "SPACEX") echo "selected"; ?>>SPACEX</option>
     </select>
 <label>Fornecedor:</label>
         <select name="cFornecedor" id="fornecedor" class="styled-select" required>
         <option value="">Selecione a opção</option>
-        <option value="Colombo" <?php if ($fornecedor == "Colombo") echo "selected"; ?>>Colombo</option>
-        <option value="Curitiba" <?php if ($fornecedor == "Curitiba") echo "selected"; ?>>Curitiba</option>
+        <option value="MULTILASER" <?php if ($fornecedor == "MULTILASER") echo "selected"; ?>>MULTILASER</option>
+        <option value="INTELBRAS" <?php if ($fornecedor == "INTELBRAS") echo "selected"; ?>>INTELBRAS</option>
+        <option value="TIMBER" <?php if ($fornecedor == "TIMBER") echo "selected"; ?>>TIMBER</option>
+        <option value="GOLDEN DISTRIBUIDORA LTDA" <?php if ($fornecedor == "GOLDEN DISTRIBUIDORA LTDA") echo "selected"; ?>>GOLDEN DISTRIBUIDORA LTDA</option>
+        <option value="GOHOBBYT FUTURE TECHNOLOGY LTDA" <?php if ($fornecedor == "GOHOBBYT FUTURE TECHNOLOGY LTDA") echo "selected"; ?>>GOHOBBYT FUTURE TECHNOLOGY LTDA</option>
+        <option value="ALLCOMP" <?php if ($fornecedor == "ALLCOMP") echo "selected"; ?>>ALLCOMP</option>
+        <option value="DRONENERDS" <?php if ($fornecedor == "DRONENERDS") echo "selected"; ?>>DRONENERDS</option>
+        <option value="SANTIAGO & SINTRA" <?php if ($fornecedor == "SANTIAGO & SINTRA") echo "selected"; ?>>SANTIAGO & SINTRA</option>
+        <option value="POWERSAFE" <?php if ($fornecedor == "POWERSAFE") echo "selected"; ?>>POWERSAFE</option>
+        <option value="AGEAGLE AERIAL SYSTEMS INC" <?php if ($fornecedor == "AGEAGLE AERIAL SYSTEMS INC") echo "selected"; ?>>AGEAGLE AERIAL SYSTEMS INC</option>
+        <option value="STARLINK" <?php if ($fornecedor == "STARLINK") echo "selected"; ?>>STARLINK</option>
         </select>
 <label>Tags:</label>
         <select name="cTags" id="tags" class="styled-select" required>
         <option value="">Selecione a opção</option>
-        <option value="Colombo" <?php if ($tags == "Colombo") echo "selected"; ?>>Colombo</option>
-        <option value="Curitiba" <?php if ($tags == "Curitiba") echo "selected"; ?>>Curitiba</option>
+        <option value="Agras" <?php if ($tags == "Agras") echo "selected"; ?>>Agras</option>
+        <option value="Consumer" <?php if ($tags == "Consumer") echo "selected"; ?>>Consumer</option>
+        <option value="DEMO" <?php if ($tags == "DEMO") echo "selected"; ?>>DEMO</option>
+        <option value="DN" <?php if ($tags == "DN") echo "selected"; ?>>DN</option>
+        <option value="Ecoflow" <?php if ($tags == "Ecoflow") echo "selected"; ?>>Ecoflow</option>
+        <option value="Enterprise" <?php if ($tags == "Enterprise") echo "selected"; ?>>Enterprise</option>
+        <option value="Pecas" <?php if ($tags == "Pecas") echo "selected"; ?>>Pecas</option>
+        <option value="Starlink" <?php if ($tags == "Starlink") echo "selected"; ?>>Starlink</option>
+        <option value="Treinamento" <?php if ($tags == "Treinamento") echo "selected"; ?>>Treinamento</option>
         </select>
 <br>
 

@@ -139,13 +139,26 @@ input:focus {
         <OPTION SELECT VALUE ="TIMBER">TIMBER
         <OPTION SELECT VALUE ="GOLDEN DISTRIBUIDORA LTDA">GOLDEN DISTRIBUIDORA LTDA
         <OPTION SELECT VALUE ="GOHOBBYT FUTURE TECHNOLOGY LTDA">GOHOBBYT FUTURE TECHNOLOGY LTDA
+        <OPTION SELECT VALUE ="ALLCOMP">ALLCOMP
+        <OPTION SELECT VALUE ="DRONENERDS">DRONENERDS
+        <OPTION SELECT VALUE ="SANTIAGO & SINTRA">SANTIAGO & SINTRA
+        <OPTION SELECT VALUE ="POWERSAFE">POWERSAFE
+        <OPTION SELECT VALUE ="AGEAGLE AERIAL SYSTEMS INC">AGEAGLE AERIAL SYSTEMS INC
+        <OPTION SELECT VALUE ="STARLINK">STARLINK
         </SELECT><br>
 
         <label>Tags:</label>
         <SELECT name = "cTags" id="tags" class="styled-select" required><br><br>
         <OPTION SELECT VALUE ="Selecione a opção">Selecione a opção
-        <OPTION SELECT VALUE ="Colombo">Colombo
-        <OPTION SELECT VALUE ="Curitiba">Curitiba
+        <OPTION SELECT VALUE ="Agras">Agras
+        <OPTION SELECT VALUE ="Consumer">Consumer
+        <OPTION SELECT VALUE ="DEMO">DEMO
+        <OPTION SELECT VALUE ="DN">DN
+        <OPTION SELECT VALUE ="Ecoflow">Ecoflow
+        <OPTION SELECT VALUE ="Enterprise">Enterprise
+        <OPTION SELECT VALUE ="Pecas">Pecas
+        <OPTION SELECT VALUE ="Starlink">Starlink
+        <OPTION SELECT VALUE ="Treinamento">Treinamento
         </SELECT><br>
         
         <label>Adicionar imagem:</label>

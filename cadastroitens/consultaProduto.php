@@ -1,10 +1,27 @@
+
 <?php
 include "conecta.php";
 
-$sql = "SELECT * FROM TBPRODUTO";
-$rs = mysqli_query($conexao,$sql);
+// Verifica se há busca
+$busca = "";
+if (isset($_GET['busca']) && !empty($_GET['busca'])) {
+    $busca = mysqli_real_escape_string($conexao, $_GET['busca']);
+    $sql = "SELECT * FROM TBPRODUTO 
+            WHERE name LIKE '%$busca%' 
+               OR ncm LIKE '%$busca%'
+               OR preco LIKE '%$busca%'  
+               OR ecoflow_sku LIKE '%$busca%' 
+               OR fabricante LIKE '%$busca%' 
+               OR fornecedor LIKE '%$busca%' 
+               OR tags LIKE '%$busca%'";
+} else {
+    $sql = "SELECT * FROM TBPRODUTO";
+}
+
+$rs = mysqli_query($conexao, $sql);
 $total_registros = mysqli_num_rows($rs);
 ?>
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -172,6 +189,36 @@ $total_registros = mysqli_num_rows($rs);
         color: white;
         text-decoration: none;
     }
+
+    .search-container {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .search-container input[type="text"] {
+        width: 300px;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 1rem;
+    }
+
+    .search-container button {
+        background-color: #2980b9;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+        font-size: 0.9rem;
+        margin-left: 5px;
+    }
+
+    .search-container button:hover {
+        background-color: #1f618d;
+    }
 </style>
 
 <title> Consulta Produto </title>
@@ -187,6 +234,17 @@ $total_registros = mysqli_num_rows($rs);
 <body>
 <h1> Lista de produtos </h1>
 <hr>
+
+<div class="search-container">
+    <form method="GET" action="">
+        <input type="text" name="busca" placeholder="Buscar produto, SKU, fabricante..." value="<?php echo htmlspecialchars($busca); ?>">
+        <button type="submit">Pesquisar</button>
+        <?php if (!empty($busca)) { ?>
+            <button type="button" onclick="window.location.href='?';" style="background-color:#95a5a6;">Limpar</button>
+        <?php } ?>
+    </form>
+</div>
+
 <br>
 <table cellspacing = "0" border = "1">
 <thead>
@@ -233,16 +291,20 @@ $total_registros = mysqli_num_rows($rs);
        rel="noopener noreferrer" 
        style="color:#2980b9; font-weight:600; text-decoration:none;">
        Ver imagem
-    </a>
-<?php } else { ?>
-    <span style="color:#888;">Sem imagem</span>
-<?php } ?>
+        </a>
+    <?php } else { ?>
+        <span style="color:#888;">Sem imagem</span>
+    <?php } ?>
         </td>
         <td>
             <button><a href="cadastraimagem.php?id=<?php print $id;?>">Cadastrar imagem</a></button>
         </td>
         <td>
+            <?php if(!empty($imagem)){ ?>
             <button><a href="alteraimagem.php?id=<?php print $id;?>">Atualizar imagem</a></button>
+         <?php } else { ?>
+        <button disabled style="background-color:#95a5a6; cursor:not-allowed;">Atualizar imagem</button>
+    <?php } ?>
         </td>
          <td>
             <button><a href="alteraProduto.php?id=<?php print $id;?>">Atualizar item</a></button><br>

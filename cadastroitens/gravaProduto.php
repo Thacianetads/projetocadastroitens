@@ -11,6 +11,8 @@ date_default_timezone_set('America/Sao_Paulo');
 $created_at = date('Y-m-d H:i:s');
 $updated_at = date('Y-m-d H:i:s');
 $imagem = $_FILES["cImagem"] ?? null;
+$acao = 'cadastrar'; 
+
 
 
 if (!$name || !$preco) die("❌ Nome ou preço do produto não informado.");
@@ -89,10 +91,14 @@ if ($imagem_url) {
         CURLOPT_RETURNTRANSFER => true,
         CURLOPT_POST => true,
         CURLOPT_POSTFIELDS => json_encode([
+            'acao' => $acao,
             'ncm' => $ncm,
             'ecoflow_sku' => $ecoflow_sku,
             'name' => $name,
             'preco' => $preco,
+            'fabricante' => $fabricante,
+            'fornecedor' => $fornecedor,
+            'tags' => $tags,
             'created_at' => $created_at,
             'updated_at' => $updated_at,
             'imagem_url' => $imagem_url

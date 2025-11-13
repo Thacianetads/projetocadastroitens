@@ -1,9 +1,17 @@
 <?php
 $txtConteudo = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 $id = $txtConteudo["cId"] ?? null;
+$ncm = $txtConteudo["cNcm"];
+$ecoflow_sku = $txtConteudo["cEcoflow_sku"];
+$name = $txtConteudo["cName"];
+$preco  = $txtConteudo["cPreco"];
+$fabricante = $txtConteudo['cFabricante'];
+$fornecedor = $txtConteudo['cFornecedor'];
+$tags = $txtConteudo['cTags'];
 date_default_timezone_set('America/Sao_Paulo');
 $updated_at = date('Y-m-d H:i:s');
 $imagem = $_FILES["cImagem"] ?? null;
+$acao = 'cadastrar imagem';
 
 if (!$id) die("❌ ID do produto não informado.");
 if (!$imagem || $imagem['error'] !== UPLOAD_ERR_OK) die("⚠️ Nenhuma imagem enviada ou erro no upload.");
@@ -64,7 +72,16 @@ curl_setopt_array($curl_webhook, [
     CURLOPT_RETURNTRANSFER => true,
     CURLOPT_POST => true,
     CURLOPT_POSTFIELDS => json_encode([
-        'id_produto' => $id,
+        'acao' => $acao,
+        'ncm' => $ncm,
+        'ecoflow_sku' => $ecoflow_sku,
+        'name' => $name,
+        'preco' => $preco,
+        'fabricante' => $fabricante,
+        'fornecedor' => $fornecedor,
+        'tags' => $tags,
+        'created_at' => $created_at,
+        'updated_at' => $updated_at,
         'imagem_url' => $imagem_url
     ]),
     CURLOPT_HTTPHEADER => [
