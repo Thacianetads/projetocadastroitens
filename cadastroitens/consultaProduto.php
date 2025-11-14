@@ -300,14 +300,18 @@ $total_registros = mysqli_num_rows($rs);
             <button><a href="cadastraimagem.php?id=<?php print $id;?>">Cadastrar imagem</a></button>
         </td>
         <td>
-            <?php if(!empty($imagem)){ ?>
-            <button><a href="alteraimagem.php?id=<?php print $id;?>">Atualizar imagem</a></button>
-         <?php } else { ?>
-        <button disabled style="background-color:#95a5a6; cursor:not-allowed;">Atualizar imagem</button>
-    <?php } ?>
+        <?php if(!empty($imagem)){ ?>
+                <button><a href="alteraimagem.php?id=<?php print $id;?>">Atualizar imagem</a></button>
+            <?php } else { ?>
+            <button disabled style="background-color:#95a5a6; cursor:not-allowed;">Atualizar imagem</button>
+        <?php } ?>
         </td>
          <td>
-            <button><a href="alteraProduto.php?id=<?php print $id;?>">Atualizar item</a></button><br>
+            <?php if(!empty($imagem)){ ?>
+                <button><a href="novaimagem.php?id=<?php print $id;?>">Atualizar item</a></button>
+            <?php } else { ?>
+                <button><a href="alteraProduto.php?id=<?php print $id;?>">Atualizar item</a></button>
+        <?php } ?>
         </td>
         <td>
             <a href="javascript:func()" onclick="confirmacao('<?php print $id; ?>','<?php print $imagem;?>')"><img src="excluir.png" alt="Exclui Pessoa" border ="0" widht="20px" height="20px"></a>

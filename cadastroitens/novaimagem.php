@@ -221,6 +221,19 @@ input:focus {
 <input type="submit" value="Enviar" name="b1" class="btn"><br>
 </form>
 
+<form action="adicionaimagem.php" method="post" enctype="multipart/form-data"> 
+<input type="hidden" name="cId" value="<?php echo $id;?>"/>
+<br>
+<br>
+<label>Atualizar imagem:</label><br>
+<input type="file" name="cImagem" id="imagem" accept="image/*" enctype="multipart/form-data"><br>
+<input type="submit" value="Enviar" name="b1" class="btn"><br>
+</div>
+<br>
+<br>
+
+</form>
+
 <script>
     document.getElementById('produtoForm').addEventListener('submit', async (e) => {
   const data = {
@@ -231,7 +244,7 @@ input:focus {
     preco: document.getElementById('preco').value,
     fabricante: document.getElementById('fabricante').value,
     fornecedor: document.getElementById('fornecedor').value,
-    tags: document.getElementById('tags').value
+    tags: document.getElementById('tags').value,
     imagem: document.getElementById('imagem').value
 
   };

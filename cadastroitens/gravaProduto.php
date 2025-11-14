@@ -93,7 +93,7 @@ if ($imagem_url) {
         CURLOPT_POSTFIELDS => json_encode([
             'acao' => $acao,
             'ncm' => $ncm,
-            'ecoflow_sku' => $ecoflow_sku,
+            'sku' => $ecoflow_sku,
             'name' => $name,
             'preco' => $preco,
             'fabricante' => $fabricante,

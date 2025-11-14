@@ -22,7 +22,8 @@ $result = $query->get_result();
 $row = $result->fetch_assoc();
 
 if (!$row || empty($row['imagem'])) {
-    die("❌ Imagem atual não encontrada no cadastro.");
+    header("Location: adicionaimagem.php?id=$id");
+    exit;
 }
 
 // Extrai o nome do arquivo da URL armazenada
